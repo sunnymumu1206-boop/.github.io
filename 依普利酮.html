@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>依普利酮详细分子机制图</title>
+<style>
+        body { font-family: "Alibaba PuHuiTi","阿里巴巴普惠体","Microsoft YaHei",Arial,sans-serif; margin: 0; padding: 15px;
+            background: linear-gradient(135deg, #ff6b3d 0%, #d84315 100%); min-height: 100vh; }
+        .container { max-width: 1600px; margin: 0 auto; background: white; border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); padding: 25px; }
+        .title { text-align: center; color: #2c3e50; font-size: 28px; font-weight: 800; margin-bottom: 20px; letter-spacing: 0.2px; }
+        .drug-info { text-align: center; background: linear-gradient(45deg, #e53935, #b71c1c); color: white; padding: 10px 14px;
+            border-radius: 12px; margin-bottom: 18px; font-size: 14px; font-weight: 700; box-shadow: 0 2px 6px rgba(183, 28, 28, 0.18); }
+        .molecular-targets { background: linear-gradient(135deg, #ffb74d, #fb8c00); color: white; padding: 20px; border-radius: 15px; margin-bottom: 18px; }
+        .targets-title { font-size: 20px; font-weight: 800; margin-bottom: 12px; text-align: center; }
+        .targets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+        .target-item { 
+        position: relative;
+        background: rgba(255,255,255,0.34);
+        padding: 12px 12px 12px 16px; 
+        border-radius: 10px; 
+        backdrop-filter: blur(14px); 
+        border: 1px solid rgba(255,255,255,0.60);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+      }
+      .target-item::before{
+        content:"";
+        position:absolute; left:0; top:10px; bottom:10px; width:6px;
+        background: linear-gradient(180deg, #ff6d00, #e65100);
+        border-radius: 6px;
+      }
+      .target-item:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.14);
+      }
+      .molecular-targets .target-desc{ color:#1f2937; } 
+      .molecular-targets .target-name{ color:#111827; } 
+        .target-name { font-weight: 700; margin-bottom: 6px; font-size: 16px; color:#1f2937; }
+        .target-desc { font-size: 13px; line-height: 1.55; opacity: 0.95; }
+
+        .legend{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; background:#f8f9fa; border:1px solid #e9ecef; border-radius:10px; padding:12px 14px; margin-bottom:14px; }
+        .legend .item{ display:flex; align-items:center; gap:8px; color:#495057; font-size:13px; }
+        .legend .key{ width:10px; height:10px; border-radius:999px; }
+        .legend .key.strong{ background:#0d6efd; } .legend .key.moderate{ background:#20c997; } .legend .key.limited{ background:#f39c12; }
+        .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700; color:#fff; margin-left:8px; vertical-align:middle; }
+        .badge-strong { background:#e65100; } .badge-moderate{ background:#f57c00; } .badge-limited{ background:#ffb300; }
+
+        .pathway-container { display: grid; grid-template-columns:  1.35fr 1.15fr 1fr; gap: 16px; margin-bottom: 12px; }
+        .pathway-section { background: linear-gradient(145deg, #f8f9fa, #e9ecef); border-radius: 12px; padding: 14px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); border: 2px solid #dee2e6; }
+        .pathway-title { font-size: 22px; font-weight: 800; color: white; margin-bottom: 12px; text-align: center; padding: 10px; border-radius: 10px; }
+        .pathway-subtitle{ font-size:12px; color:#2c3e50; text-align:center; margin-top:-6px; margin-bottom: 8px; opacity:0.85; }
+
+        .cardiovascular-title { background: linear-gradient(90deg, #ff7043, #e64a19); }
+        .renal-title { background: linear-gradient(90deg, #27ae60, #229954); }
+        .neuro-title { background: linear-gradient(90deg, #8e44ad, #6c3483); }
+        .peripheral-title { background: linear-gradient(90deg, #16a085, #0e6655); }
+        .metabolic-title { background: linear-gradient(90deg, #d35400, #a04000); }
+
+        .pathway-step { margin-bottom: 12px; padding: 12px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-left: 5px solid #007bff; transition: all 0.25s ease; }
+        .pathway-step:hover { transform: translateX(2px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .cardiovascular .pathway-step { border-left-color: #e74c3c; }
+        .renal .pathway-step { border-left-color: #27ae60; }
+        .neuro .pathway-step { border-left-color: #8e44ad; }
+        .peripheral .pathway-step { border-left-color: #16a085; }
+        .metabolic .pathway-step { border-left-color: #d35400; }
+
+        .step-header { font-weight: 800; color: #2c3e50; margin-bottom: 6px; font-size: 16px; display: flex; align-items: center; gap: 10px; }
+        .step-number { background: linear-gradient(45deg, #007bff, #0056b3); color: white; width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; flex-shrink: 0; }
+        .cardiovascular .step-number { background: linear-gradient(45deg, #e74c3c, #c0392b); }
+        .renal .step-number { background: linear-gradient(45deg, #27ae60, #229954); }
+        .neuro .step-number { background: linear-gradient(45deg, #8e44ad, #6c3483); }
+        .peripheral .step-number { background: linear-gradient(45deg, #16a085, #0e6655); }
+        .metabolic .step-number { background: linear-gradient(45deg, #d35400, #a04000); }
+
+        .pathway-details { color: #495057; font-size: 14px; line-height: 1.85; margin-left: 34px; }
+        .pathway-arrow { text-align: center; font-size: 18px; color: #007bff; margin: 6px 0; font-weight: 700; }
+
+        .molecule { background: linear-gradient(45deg, #f39c12, #e67e22); color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 800; margin: 0 2px; }
+        .enzyme { background: linear-gradient(45deg, #9b59b6, #8e44ad); color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 800; margin: 0 2px; }
+        .receptor { background: linear-gradient(45deg, #e67e22, #d35400); color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 800; margin: 0 2px; }
+
+        .clinical-outcomes { background: linear-gradient(135deg, #4fc3f7, #0288d1); padding: 18px; border-radius: 14px; }
+        .outcomes-title { font-size: 20px; font-weight: 800; color: #2d3436; margin-bottom: 12px; text-align: center; }
+        .outcomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .outcome-item { background: white; padding: 12px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-left: 4px solid #f39c12; }
+        .outcome-item.primary-outcome { border-left-width: 6px; }
+        .outcome-item.secondary-outcome { border-left-width: 3px; opacity: 0.94; }
+        .outcome-name { font-weight: 800; color: #2c3e50; margin-bottom: 4px; }
+        .outcome-desc { color: #7f8c8d; font-size: 14px; line-height: 1.75; }
+
+        .controls{ display:flex; align-items:center; gap:10px; margin:8px 0 12px 0; }
+        .controls label{ font-size:13px; color:#34495e; cursor:pointer; }
+        .secondary-hidden .peripheral, .secondary-hidden .metabolic{ display:none; }
+
+        /* Superscript reference link style */
+        .pathway-title sup a, .pathway-title sup { font-size: 10px !important; font-weight: normal !important; text-decoration: none; margin-left: 2px; color: inherit; }
+        .pathway-step sup a, .pathway-step sup { font-size: 10px !important; font-weight: normal !important; text-decoration: none; margin-left: 2px; color: inherit; }
+
+        @media (max-width: 1400px){ .pathway-container{ grid-template-columns:  1.35fr 1.15fr 1fr; } }
+        @media (max-width: 1100px){ .pathway-container{ grid-template-columns:  1.35fr 1.15fr 1fr; } }
+        @media (max-width: 900px){
+          .pathway-container{ grid-template-columns: 1fr; }
+        }
+
+.clinical-outcomes .outcomes-title {
+    color: white !important;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1 class="title">依普利酮 (Eplerenone) 详细分子机制图</h1>
+<div class="drug-info">选择性<span class="receptor">盐皮质激素受体 (MR/NR3C2)</span>拮抗剂 · 亲和力高、对<span class="molecule">雄激素/孕激素受体</span>亲和力极低（较螺内酯），降低内分泌相关不良反应</div>
+<div class="molecular-targets">
+<div class="targets-title">主要分子靶点与级联</div>
+<div class="targets-grid">
+<div class="target-item">
+<div class="target-name">MR受体复合体（NR3C2）<span class="badge badge-strong">核心</span></div>
+<div class="target-desc">依普利酮与<span class="receptor">MR</span>竞争性结合，阻断<span class="molecule">醛固酮</span>诱导的受体激活→抑制核内转录（<span class="enzyme">GRE</span>基因元件）。</div>
+</div>
+<div class="target-item">
+<div class="target-name">下游转录靶基因</div>
+<div class="target-desc"><span class="molecule">SGK1</span>、<span class="molecule">ENaC(SCNN1A/B/G)</span>、<span class="molecule">Na⁺/K⁺-ATPase</span>、<span class="molecule">ROMK(KCNJ1)</span>、<span class="molecule">NCC(SLC12A3)</span>等→阻断Na⁺潴留、K⁺排泄增加等效应。</div>
+</div>
+<div class="target-item">
+<div class="target-name">炎症/纤维化/氧化应激通路</div>
+<div class="target-desc">抑制<span class="enzyme">NF-κB</span>活化、<span class="enzyme">TGF-β1/Smad</span>纤维化信号、<span class="enzyme">NADPH氧化酶(NOX2/NOX4)</span>→降低炎症、纤维化与ROS生成。</div>
+</div>
+<div class="target-item">
+<div class="target-name">血管/内皮通路</div>
+<div class="target-desc">阻断内皮/平滑肌MR→改善<span class="enzyme">eNOS</span>功能、减少内皮钙超载与内皮素-1上调，抑制血管重构与硬化。</div>
+</div>
+</div>
+</div>
+<div class="legend">
+<div class="item"><span class="key strong"></span> 证据强（大规模临床或权威指南支持）</div>
+<div class="item"><span class="key moderate"></span> 中等证据（多中心或一致性RCT/亚组/转化研究）</div>
+<div class="item"><span class="key limited"></span> 限定证据（小样本/机制或探索性）</div>
+</div>
+<div class="controls">
+<input id="toggle-secondary" type="checkbox"/>
+<label for="toggle-secondary">只显示核心器官（隐藏外周血管/代谢）</label>
+</div>
+<div class="pathway-container">
+<!-- 心血管系统 -->
+<div class="pathway-section cardiovascular">
+<div class="pathway-title cardiovascular-title">❤️ 心血管系统分子通路 <span class="badge badge-strong">强</span></div>
+<div class="pathway-subtitle">核心：抗纤维化/抗重构/抗炎氧化 → 改善预后（HF/高血压相关心肌损伤）</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">1</div> 拮抗心肌细胞与心脏成纤维细胞MR</div>
+<div class="pathway-details">依普利酮竞争<span class="receptor">MR</span> → 阻断醛固酮-<span class="receptor">MR</span>复合体入核 → 下游<span class="molecule">SGK1</span>等转录↓。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">2</div> 抑制炎症/氧化应激/纤维化</div>
+<div class="pathway-details"><span class="enzyme">NF-κB</span>信号下调、<span class="enzyme">NOX2/NOX4</span>介导的ROS↓、<span class="enzyme">TGF-β1/Smad3</span>活化↓、<span class="enzyme">NLRP3炎症小体</span>活化↓、巨噬细胞由M1向M2极化倾向↑ → 成纤维细胞活性↓、胶原沉积↓、心肌间质纤维化↓。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">3</div> 抑制肥厚与电-结构重构</div>
+<div class="pathway-details">抑制<span class="enzyme">MAPK</span>、<span class="enzyme">calcineurin-NFAT</span>等通路 → 心肌肥厚信号下降；减少心室重构与室性不稳定基质。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">4</div> 内皮功能/血管硬度改善</div>
+<div class="pathway-details">内皮<span class="enzyme">eNOS</span>功能改善，内皮素-1下调 → 小动脉顺应性↑、动脉硬度↓、冠状微循环灌注改善。</div>
+</div>
+</div>
+<!-- 肾脏系统 -->
+<div class="pathway-section renal">
+<div class="pathway-title renal-title">🩺 肾脏系统分子通路 <span class="badge badge-strong">强</span></div>
+<div class="pathway-subtitle">核心：抗蛋白尿（部分与血压无关）/抗纤维化/体液调控</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">1</div> 远曲集合管Na⁺转运抑制</div>
+<div class="pathway-details">阻断<span class="receptor">MR</span>→ 抑制<span class="molecule">SGK1→ENaC/Na⁺/K⁺-ATPase</span>转录与膜插入 → Na⁺重吸收↓、水潴留↓ → 体液容量与血压下降。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">2</div> 肾小球与小管-间质保护</div>
+<div class="pathway-details">抑制肾内<span class="enzyme">TGF-β/Smad</span>、炎症与ROS → 足细胞损伤↓、系膜扩张与硬化↓ → 蛋白尿下降（BP独立成分）。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">3</div> 肾血流动力学与RAAS交互</div>
+<div class="pathway-details">体液与管-球反馈改善 → 肾内压力过载↓；RAAS二次激活被抑制（对AngII/醛固酮轴的反向调节）。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">4</div> 高钾风险管理（机制）</div>
+<div class="pathway-details">Na⁺重吸收↓伴K⁺分泌↓ → <span class="molecule">血钾</span>上升风险↑；依普利酮相较螺内酯MR选择性更高，性腺相关不良反应更少，但高钾风险需个体化监测。</div>
+</div>
+</div>
+<!-- 脑血管系统 -->
+<div class="pathway-section neuro">
+<div class="pathway-title neuro-title">🧠 脑血管/脑保护分子通路 <span class="badge badge-moderate">中</span></div>
+<div class="pathway-subtitle">要点：内皮MR阻断→微循环/BBB稳定性与炎症减轻</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">1</div> 内皮与星形胶质细胞MR阻断</div>
+<div class="pathway-details">减少内皮活化与黏附分子表达，维持血脑屏障紧密连接蛋白，降低白细胞浸润与水肿。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">2</div> 微循环通路与再灌注损伤</div>
+<div class="pathway-details">抑制炎症与ROS减少微血栓形成与灌注不良，降低缺血-再灌注期间的组织损伤（以机制/转化证据为主）。</div>
+</div>
+</div>
+<!-- 外周血管系统 -->
+<div class="pathway-section peripheral">
+<div class="pathway-title peripheral-title">🦵 外周血管与重构 <span class="badge badge-moderate">中</span></div>
+<div class="pathway-subtitle">要点：阻断平滑肌/内皮MR→抗重构、顺应性改善</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">1</div> 抑制平滑肌细胞病理性增殖</div>
+<div class="pathway-details">MR阻断→<span class="enzyme">ROS/TGF-β/NF-κB</span>等下降 → 胶原沉积与中膜增厚减少，动脉硬度下降。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">2</div> 内皮功能优化与通透性调控</div>
+<div class="pathway-details">eNOS功能改善、内皮素-1下调 → 外周阻力下降，微循环灌注与组织氧供改善。</div>
+</div>
+</div>
+<!-- 代谢系统 -->
+<div class="pathway-section metabolic">
+<div class="pathway-title metabolic-title">⚡ 代谢与免疫微环境 <span class="badge badge-limited">限</span></div>
+<div class="pathway-subtitle">要点：脂肪组织/巨噬细胞MR与胰岛素敏感性</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">1</div> 脂肪组织炎症与胰岛素信号</div>
+<div class="pathway-details">阻断脂肪组织与巨噬细胞MR→ 低度炎症与ROS下降，胰岛素受体信号环境改善（临床证据有限）。</div>
+</div>
+<div class="pathway-arrow">↓</div>
+<div class="pathway-step">
+<div class="step-header"><div class="step-number">2</div> 电解质/酸碱与代谢交互</div>
+<div class="pathway-details">体液与K⁺水平变化可影响胰岛素分泌与周边利用；规范监测有助于代谢稳态维护。</div>
+</div>
+</div>
+</div>
+<div class="clinical-outcomes">
+<div class="outcomes-title">临床效应与分子基础</div>
+<div class="outcomes-grid">
+<div class="outcome-item primary-outcome">
+<div class="outcome-name">📉 血压降低（温和-中等）</div>
+<div class="outcome-desc">Na⁺/水潴留抑制 + 血管重构改善 → 外周阻力与容量负荷下降。</div>
+</div>
+<div class="outcome-item primary-outcome">
+<div class="outcome-name">💓 心肌/心衰保护</div>
+<div class="outcome-desc">抗炎/抗纤维化/抗重构；降低死亡/住院风险的证据来自大型试验（依普利酮在HF人群）。</div>
+</div>
+<div class="outcome-item primary-outcome">
+<div class="outcome-name">🛡️ 肾保护与降蛋白尿</div>
+<div class="outcome-desc">蛋白尿下降存在BP独立性成分；抑制肾内炎症纤维化，延缓进展（需监测血钾与肾功能）。</div>
+</div>
+<div class="outcome-item">
+<div class="outcome-name">🫀 血管保护</div>
+<div class="outcome-desc">内皮功能改善、动脉硬度下降、抗重构。</div>
+</div>
+<div class="outcome-item">
+<div class="outcome-name">🧠 脑保护（推断/转化）</div>
+<div class="outcome-desc">内皮MR阻断与炎症/ROS下降可能减少再灌注损伤与微血栓。</div>
+</div>
+<div class="outcome-item secondary-outcome">
+<div class="outcome-name">⚡ 代谢影响（探索）</div>
+<div class="outcome-desc">炎症与氧化应激下降可能改善胰岛素敏感性（证据有限）。</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function(){
+  var cb = document.getElementById('toggle-secondary');
+  function update(){
+    if (!cb) return;
+    document.body.classList.toggle('secondary-hidden', cb.checked);
+  }
+  if (cb){
+    cb.addEventListener('change', update);
+    update();
+  }
+})();
+</script>
+</body>
+</html>
