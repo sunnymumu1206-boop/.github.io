@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>减肥界的"三神仙打架"</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.1) 0px,
+                rgba(255,255,255,0.1) 20px,
+                transparent 20px,
+                transparent 40px
+            );
+            animation: move 20s linear infinite;
+        }
+        
+        @keyframes move {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            margin: 10px 0 0 0;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 0;
+        }
+        
+        .section {
+            margin: 20px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header::before {
+            content: "🏆";
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .character-card {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .character-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d63031;
+            margin-bottom: 5px;
+        }
+        
+        .character-desc {
+            font-size: 14px;
+            color: #636e72;
+        }
+        
+        .comparison-table {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .table-row {
+            display: flex;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .table-cell {
+            flex: 1;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 13px;
+            border-right: 1px solid #dee2e6;
+        }
+        
+        .table-cell:last-child {
+            border-right: none;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .highlight-box::before {
+            content: "💡";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+        
+        .effect-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border: 2px dashed #ff6b6b;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .warning-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .final-summary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .emoji {
+            font-size: 20px;
+            margin: 0 5px;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header pulse">
+            <h1 class="title">减肥界的"三神仙打架"！</h1>
+            <p class="subtitle">司美格鲁肽 vs 玛仕度肽 vs 替尔泊肽</p>
+        </div>
+        
+        <div class="content">
+            <!-- 角色介绍 -->
+            <div class="section fade-in">
+                <div class="section-header">
+                    登场人物介绍
+                </div>
+                <div class="section-content">
+                    <div class="character-card">
+                        <div class="character-name">🥇 司美格鲁肽</div>
+                        <div class="character-desc">GLP-1受体激动剂，外号"奥胖终结者"<br>商品名：Wegovy/Ozempic</div>
+                    </div>
+                    
+                    <div class="character-card">
+                        <div class="character-name">🇨🇳 玛仕度肽</div>
+                        <div class="character-desc">国产希望之星，"肽中之王"<br>尚在临床试验冲刺中</div>
+                    </div>
+                    
+                    <div class="character-card">
+                        <div class="character-name">👑 替尔泊肽</div>
+                        <div class="character-desc">双机制选手，GLP-1+GIP受体激动剂<br>商品名：Mounjaro，昵称"终极boss"</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 减重效果对比 -->
+            <div class="section fade-in">
+                <div class="section-header">
+                    减重效果大PK
+                </div>
+                <div class="section-content">
+                    <div class="highlight-box">
+                        <h3 style="margin-top: 25px; color: #d63031;">📊 真相来了！</h3>
+                        <p><strong>替尔泊肽</strong>：72周平均减重 <span class="effect-badge">20.2%</span></p>
+                        <p><strong>司美格鲁肽</strong>：72周平均减重 <span class="effect-badge">13.7%</span></p>
+                        <p><strong>玛仕度肽</strong>：预期减重超过 <span class="effect-badge">15%</span></p>
+                    </div>
+                    
+                    <p style="text-align: center; color: #636e72; font-size: 14px;">
+                        <em>替尔泊肽目前是减重王者！</em>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 作用机制 -->
+            <div class="section fade-in">
+                <div class="section-header" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333;">
+                    🔬 作用机制大揭秘
+                </div>
+                <div class="section-content">
+                    <div class="comparison-table">
+                        <div class="table-row table-header">
+                            <div class="table-cell">药物</div>
+                            <div class="table-cell">机制</div>
+                            <div class="table-cell">效果</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">司美格鲁肽</div>
+                            <div class="table-cell">纯GLP-1</div>
+                            <div class="table-cell">控糖+抑食欲</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">替尔泊肽</div>
+                            <div class="table-cell">GLP-1+GIP双重</div>
+                            <div class="table-cell">控糖+抑食+促代谢</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">玛仕度肽</div>
+                            <div class="table-cell">三重机制</div>
+                            <div class="table-cell">"三肽合一"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 血糖控制 -->
+            <div class="section fade-in">
+                <div class="section-header" style="background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333;">
+                    🩺 血糖控制能力
+                </div>
+                <div class="section-content">
+                    <p><strong>替尔泊肽</strong>：HbA1c下降最多 <span class="effect-badge">-2.3%</span></p>
+                    <p><strong>司美格鲁肽</strong>：HbA1c下降约 <span class="effect-badge">-1.9%</span></p>
+                    <p><strong>玛仕度肽</strong>：控糖能力 <span class="effect-badge">待验证</span></p>
+                    
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                        <p style="margin: 0; font-size: 14px; color: #1976d2;">
+                            💊 糖尿病患者：替尔泊肽 > 司美格鲁肽
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 副作用警告 -->
+            <div class="section fade-in">
+                <div class="section-header" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); color: #333;">
+                    ⚠️ 副作用提醒
+                </div>
+                <div class="section-content">
+                    <div class="warning-box">
+                        <div class="warning-icon">🤢</div>
+                        <p><strong>共同副作用：恶心、呕吐、腹泻</strong></p>
+                        <p style="font-size: 14px; margin: 10px 0 0 0;">替尔泊肽副作用略高，司美格鲁肽相对温和</p>
+                    </div>
+                    
+                    <p style="text-align: center; color: #e74c3c; font-weight: bold;">
+                        减重有风险，呕吐需谨慎！
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 用法用量 -->
+            <div class="section fade-in">
+                <div class="section-header" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    💉 用法用量速览
+                </div>
+                <div class="section-content">
+                    <div class="comparison-table">
+                        <div class="table-row table-header">
+                            <div class="table-cell">药物</div>
+                            <div class="table-cell">频率</div>
+                            <div class="table-cell">最高剂量</div>
+                            <div class="table-cell">起效时间</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">司美格鲁肽</div>
+                            <div class="table-cell">每周1次</div>
+                            <div class="table-cell">2.4mg</div>
+                            <div class="table-cell">约4周</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">替尔泊肽</div>
+                            <div class="table-cell">每周1次</div>
+                            <div class="table-cell">15mg</div>
+                            <div class="table-cell">2周见效</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">玛仕度肽</div>
+                            <div class="table-cell">每周1次</div>
+                            <div class="table-cell">在研中</div>
+                            <div class="table-cell">TBD</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 选择建议 -->
+            <div class="section fade-in">
+                <div class="section-header" style="background: linear-gradient(135deg, #a8edea, #fed6e3); color: #333;">
+                    🎯 选择建议
+                </div>
+                <div class="section-content">
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p><strong>🔥 减重+控糖双需求</strong><br>
+                        ➤ 替尔泊肽，双修宗师</p>
+                    </div>
+                    
+                    <div style="background: #fff3e0; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p><strong>🌸 健康减肥，胃娇嫩</strong><br>
+                        ➤ 司美格鲁肽，温柔老好人</p>
+                    </div>
+                    
+                    <div style="background: #fce4ec; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <p><strong>🇨🇳 支持国产</strong><br>
+                        ➤ 玛仕度肽，等临床落地！</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 总结表格 -->
+            <div class="section fade-in">
+                <div class="section-header">
+                    📋 终极对比总结
+                </div>
+                <div class="section-content">
+                    <div class="comparison-table">
+                        <div class="table-row table-header">
+                            <div class="table-cell">项目</div>
+                            <div class="table-cell">司美格鲁肽</div>
+                            <div class="table-cell">替尔泊肽</div>
+                            <div class="table-cell">玛仕度肽</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">机制</div>
+                            <div class="table-cell">GLP-1单激动剂</div>
+                            <div class="table-cell">GLP-1+GIP双激动剂</div>
+                            <div class="table-cell">三激动剂(在研)</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">减重效果</div>
+                            <div class="table-cell">10-15%</div>
+                            <div class="table-cell">15-22%</div>
+                            <div class="table-cell">预计>15%</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">控糖能力</div>
+                            <div class="table-cell">优秀</div>
+                            <div class="table-cell">更优秀</div>
+                            <div class="table-cell">待验证</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">副作用</div>
+                            <div class="table-cell">中等</div>
+                            <div class="table-cell">略高</div>
+                            <div class="table-cell">暂不明确</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">是否上市</div>
+                            <div class="table-cell">✅</div>
+                            <div class="table-cell">✅</div>
+                            <div class="table-cell">❌(临床中)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 结尾 -->
+        <div class="final-summary">
+            <h2 style="margin: 0 0 15px 0;">🎯 最后一句话</h2>
+            <p style="margin: 0 0 10px 0;">肽药减肥不是魔法棒，但确实打开了肥胖治疗的新纪元！</p>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9;">
+                <span class="emoji">⚠️</span> 合理用肽，科学瘦身 <span class="emoji">⚠️</span><br>
+                <strong>一切用药都需医生指导！</strong>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
